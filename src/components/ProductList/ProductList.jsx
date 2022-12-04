@@ -80,21 +80,39 @@ function ProductList(){
     // }, []);
 
     // mounting phase
+    // useEffect(() => {
+    //     fetch("http://localhost:3001/products")
+    //         .then((response) => {
+    //             console.log("fetching successful ", response);
+    //             return response.json();
+    //         })
+    //         .then((result) => {
+    //             console.log("parsing json successful ", result);
+    //             setIsLoading(false);
+    //             setProducts(result);
+    //         })
+    //         .catch(error => {
+    //             console.log("error in fetch/parse ", error);
+    //             setError(error);
+    //         })
+    // }, []);
+
+    // mounting phase(using asyn-await)
     useEffect(() => {
-        fetch("http://localhost:3001/products")
-            .then((response) => {
-                console.log("fetching successful ", response);
-                return response.json();
-            })
-            .then((result) => {
-                console.log("parsing json successful ", result);
+        
+        async function asyncLoadingProducts(){
+            try{
+                const response = await fetch("http://localhost:3001/products");
+                const jsonResponse = await response.json();
                 setIsLoading(false);
-                setProducts(result);
-            })
-            .catch(error => {
-                console.log("error in fetch/parse ", error);
+                setProducts(jsonResponse);
+            }
+            catch(error){
+                console.log(error);
                 setError(error);
-            })
+            } 
+        }
+        asyncLoadingProducts();
     }, []);
 
     if(isError){

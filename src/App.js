@@ -1,4 +1,5 @@
 
+import CountDown from './components/CountDown/CountDown';
 import ProductList from './components/ProductList/ProductList';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         Hello World
+        <CountDown startFrom = {10}/>
         <ProductList />
       </header>
     </div>
