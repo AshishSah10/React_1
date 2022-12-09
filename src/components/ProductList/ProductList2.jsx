@@ -1,7 +1,8 @@
-import React, { useEffect, useState, version } from "react";
+import React, { memo, useEffect, useState, version } from "react";
 //import ProductCard from "../ProductCard/ProductCard";
 
 import ProductCard from "../ProductCard";
+import { ProductCard2 } from "../ProductCard/ProductCard2";
 
 const _products = [
     {
@@ -31,7 +32,7 @@ function getProducts(callback){
     setTimeout(() => callback(_products), 3000);
 }
 
-function ProductList({addToCart, removeFromCart, cart={}}){
+function ProductList2(){
     const [isError, setError] = useState(null);
 
     let isLoadingState = useState(true);
@@ -132,12 +133,9 @@ function ProductList({addToCart, removeFromCart, cart={}}){
                 {
                     products.map(
                         product => (
-                            <ProductCard
+                            <ProductCard2
                              key={product.id}
                              product = {product}
-                             addToCart = {addToCart}
-                             removeFromCart = {removeFromCart}
-                             quantity = {cart[product.id] ? cart[product.id].quantity : 0}
                             />),
                         {/* product => <ProductCard {...product}/> */}
                     )
@@ -147,4 +145,4 @@ function ProductList({addToCart, removeFromCart, cart={}}){
     }
 }
 
-export default ProductList;
+export default memo(ProductList2);
